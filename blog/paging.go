@@ -44,7 +44,7 @@ func (pager *ArticlePager) ListFromPages(page int, pages int) ([]*Article, error
 	maxNbOfArticles := pager.perPage * pages
 
 	if (pager.numberOfArticles() - 1) < startAt+maxNbOfArticles {
-		endAt = pager.numberOfArticles() - 1
+		endAt = pager.numberOfArticles()
 	} else {
 		endAt += maxNbOfArticles
 	}
@@ -53,7 +53,7 @@ func (pager *ArticlePager) ListFromPages(page int, pages int) ([]*Article, error
 		return append(articles, pager.articles[startAt]), nil
 	}
 
-	return pager.articles[startAt : endAt+1], nil
+	return pager.articles[startAt:endAt], nil
 }
 
 // SortArticles : sort articles from predefined presets
