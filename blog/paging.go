@@ -19,6 +19,20 @@ const (
 	SortByModified
 )
 
+const (
+	// DefaultNumberOfArticlesPerPage : default number of articles per page
+	DefaultNumberOfArticlesPerPage = 5
+)
+
+// NewArticlePager : creates a default pager
+func NewArticlePager() *ArticlePager {
+	pager := new(ArticlePager)
+	pager.articles = []*Article{}
+	pager.perPage = DefaultNumberOfArticlesPerPage
+
+	return pager
+}
+
 // ListFromPage : list the articles at the specified page
 func (pager *ArticlePager) ListFromPage(page int) ([]*Article, error) {
 	return pager.ListFromPages(page, 1)
