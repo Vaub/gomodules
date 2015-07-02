@@ -1,0 +1,20 @@
+{
+  "name": "va.net",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Vaub/gomodules",
+  "authors": [
+    "Vincent Aube <vincent.aube@hotmail.com>"
+  ],
+  "description": "My website/laboratory :)",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}

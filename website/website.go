@@ -10,13 +10,11 @@ import (
 	"github.com/vaub/gomodules/website/handlers"
 )
 
-const (
-	index string = "index.html"
-)
-
 var (
 	blogPager = blog.NewArticlePager()
-	templates = template.Must(template.ParseFiles(staticResource(index)))
+	templates = template.Must(template.ParseFiles(
+		"templates/default.tmpl",
+		"templates/index.tmpl"))
 )
 
 func main() {
@@ -28,6 +26,7 @@ func main() {
 
 	r.HandleFunc("/", defaultHandler)
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+	r.PathPrefix("/jquery/").Handler(http.StripPrefix("/jquery/", http.FileServer(http.Dir("./bower_components/jquery/dist/"))))
 
 	api := r.PathPrefix("/api").Subrouter()
 	api.Headers("Content-Type", "application/json")
@@ -43,7 +42,7 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 }
 
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	templates.ExecuteTemplate(w, index, nil)
+	templates.ExecuteTemplate(w, "default.tmpl", nil)
 }
 
 func staticResource(name string) string {
