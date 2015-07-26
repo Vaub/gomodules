@@ -6,19 +6,16 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/vaub/gomodules/blog"
 	"github.com/vaub/gomodules/website/handlers"
 )
 
 var (
-	blogPager = blog.NewArticlePager()
 	templates = template.Must(template.ParseFiles(
 		"templates/default.tmpl",
 		"templates/index.tmpl"))
 )
 
 func main() {
-	blogPager, _ = blog.FetchFromPath("static/articles")
 	handlers.InitBlog()
 
 	r := mux.NewRouter().StrictSlash(false)
