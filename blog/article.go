@@ -10,14 +10,14 @@ type Article struct {
 }
 
 // ByName : sort articles by name
-type ByName []*Article
+type ByName []Article
 
 func (s ByName) Len() int           { return len(s) }
 func (s ByName) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 func (s ByName) Less(i, j int) bool { return s[i].Name < s[j].Name }
 
 // ByModified : sort articles by date modified
-type ByModified []*Article
+type ByModified []Article
 
 func (s ByModified) Len() int           { return len(s) }
 func (s ByModified) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }

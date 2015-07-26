@@ -17,13 +17,13 @@ const (
 func TestFetchFromPath(t *testing.T) {
 	prepareFiles()
 
-	pager, err := FetchFromPath(dir)
+	blog, err := FetchFromPath(dir)
 	if err != nil {
 		t.Errorf("Error while creating the pager :\n%s", err.Error())
 	}
 
-	if len(pager.articles) != 2 {
-		t.Errorf("Found %d articles, expected 2", len(pager.articles))
+	if len(blog.Articles) != 2 {
+		t.Errorf("Found %d articles, expected 2", len(blog.Articles))
 	}
 
 	deleteFiles()

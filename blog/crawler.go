@@ -6,9 +6,16 @@ import (
 	"path"
 )
 
-// FetchFromPath : create and fill the pager from a path
-func FetchFromPath(dirPath string) (*ArticlePager, error) {
-	pager := NewArticlePager()
+const (
+	defaultPerPage = 5
+)
+
+// FetchFromPath : create and fill the blog from a path
+func FetchFromPath(dirPath string) (*Blog, error) {
+	blog, err := NewBlog(defaultPerPage)
+	if err != nil {
+		return nil, err
+	}
 
 	content, err := ioutil.ReadDir(dirPath)
 	if err != nil {
@@ -19,12 +26,12 @@ func FetchFromPath(dirPath string) (*ArticlePager, error) {
 		fileName := file.Name()
 
 		if isFileHTML(fileName) {
-			article := &Article{path.Base(fileName), fileName, file.ModTime()}
-			pager.articles = append(pager.articles, article)
+			article := Article{path.Base(fileName), fileName, file.ModTime()}
+			blog.Articles = append(blog.Articles, article)
 		}
 	}
 
-	return pager, nil
+	return blog, nil
 }
 
 func isFileHTML(filePath string) bool {
